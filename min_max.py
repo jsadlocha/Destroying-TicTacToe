@@ -1,11 +1,12 @@
 from board import Board
 import numpy as np
+from typing import List, Tuple, Dict
 
 class MinMax:
     def __init__(self):
-        self.lookup_table: dict[int, list[tuple[int, int]]] = dict()
+        self.lookup_table: Dict[int, List[Tuple[int, int]]] = dict()
 
-    def __call__(self, board: list[int]) -> list[tuple[int, int]]:
+    def __call__(self, board: List[int]) -> List[Tuple[int, int]]:
         graph = board[:]
 
         solution = []
@@ -17,12 +18,12 @@ class MinMax:
         self.lookup_table[Board.hash(board[:])] = solution[:]
         return solution
 
-    def get_lookup_table(self, board: list[int]) -> list[tuple[int, int]]:
+    def get_lookup_table(self, board: List[int]) -> List[Tuple[int, int]]:
         if not (Board.hash(board[:]) in self.lookup_table):
             self.__call__(board)     
         return self.lookup_table[Board.hash(board[:])]
 
-    def getBestMoveAndNonDeterministic(self, board: list[int], player: int) -> int:
+    def getBestMoveAndNonDeterministic(self, board: List[int], player: int) -> int:
         actions = self.get_lookup_table(board)
         action = np.array(actions)
         
@@ -35,7 +36,7 @@ class MinMax:
         return actions[idx][0]
 
 
-    def dfs(self, graph: list[int], pos: int) -> int:
+    def dfs(self, graph: List[int], pos: int) -> int:
         board = graph[:]
         player = 1 if board.count(0) % 2 else 2
         board[pos] = player

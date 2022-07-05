@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Union
+from typing import Union, List, Tuple
 
 class Player(Enum):
     Free = 0
@@ -20,10 +20,10 @@ class Board:
     def reset(self) -> None:
         self.board = [Player.Free.value]*9
     
-    def __call__(self) -> list[int]:
+    def __call__(self) -> List[int]:
         return self.board
 
-    def __getitem__(self, idx: Union[int, slice]) -> list[int]:
+    def __getitem__(self, idx: Union[int, slice]) -> List[int]:
         return self.board[idx]
 
     def __len__(self) -> int:
@@ -41,7 +41,7 @@ class Board:
         return res
 
     @staticmethod
-    def hash(board: list[int]) -> int:
+    def hash(board: List[int]) -> int:
         res = 0
         for idx, val in enumerate(board):
             res += (3**idx) * val
@@ -75,7 +75,7 @@ class Board:
 
         return StatusBoard.NO_WIN
 
-    def checkWinDrawEnd(self, last_move:int, player: int = None) -> tuple[bool, int]:
+    def checkWinDrawEnd(self, last_move:int, player: int = None) -> Tuple[bool, int]:
         row = last_move // 3
         col = last_move % 3
         score = [1, -1]
@@ -104,7 +104,7 @@ class Board:
         return False, 0
 
     @staticmethod
-    def checkWinAndEnd(board: list[int], last_move: int, player: int) -> tuple[bool, int]:
+    def checkWinAndEnd(board: List[int], last_move: int, player: int) -> Tuple[bool, int]:
         row = last_move // 3
         col = last_move % 3
         score = [1, -1]

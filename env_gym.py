@@ -1,5 +1,6 @@
 from board import Board, Player, StatusBoard
 import numpy as np
+from typing import Tuple, List
 
 class InvalidMoveException(Exception):
     pass
@@ -17,10 +18,10 @@ class TicTacToe:
     def render(self) -> None:
         print(self.board)
 
-    def getState(self) -> list[int]:
+    def getState(self) -> List[int]:
         return self.board[:]
 
-    def step(self, pos: int) -> tuple[list, int, bool, int]:
+    def step(self, pos: int) -> Tuple[list, int, bool, int]:
         player = Player.O if self.board[:].count(0) % 2 else Player.X
         if self.board.move(pos, player) == StatusBoard.INVALID_MOVE:
             raise InvalidMoveException("Invalid move, game was stopped!")
