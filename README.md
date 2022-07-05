@@ -64,3 +64,9 @@ Usage: `python <filename>`
 
 * Test - testing tictactoe.</br>
     `path: test\test_board.py`
+
+
+
+# Images
+![game](https://github.com/jsadlocha/Destroying-TicTacToe/tree/main/img/tictactoe.png "game")</br>
+*I realized, this visualize style is not portable.
