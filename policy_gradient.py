@@ -148,7 +148,6 @@ def gameloop():
             agent.decay_epsilon()
 
         loss = agent.update(episodes)
-        #print(f'loss: {loss}')
         loop.set_description(f'loss: {loss}')
 
 

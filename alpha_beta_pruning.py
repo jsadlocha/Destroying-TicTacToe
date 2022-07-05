@@ -27,9 +27,9 @@ class AlphaBetaPruning:
             if elem == 0:
                 score = self.dfs(board, idx, alfa, beta)
                 if player == 2:
-                    alfa = max(alfa, score) #alfa if alfa > score else score
+                    alfa = max(alfa, score)
                 else:
-                    beta = min(beta, score) #beta if beta < score else score
+                    beta = min(beta, score)
             
             if alfa > beta or alfa == beta:
                 break

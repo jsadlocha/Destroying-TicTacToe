@@ -57,8 +57,4 @@ class MinMax:
 
 
 if __name__ == "__main__":
-    b = Board()
-    a = MinMax()
-    print(a.lookup_table)
-    b[3]
-    print(a.get_lookup_table(b[:]))
+    pass

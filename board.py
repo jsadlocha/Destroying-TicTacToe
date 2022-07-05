@@ -138,9 +138,5 @@ class Board:
         return True        
 
 
-#import sys
-#sys.setrecursionlimit(10)
-
 if __name__ == "__main__":
     pass
-    #x = Board()

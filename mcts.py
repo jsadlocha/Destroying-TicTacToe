@@ -212,11 +212,9 @@ def gameloop():
     episodes = 100
     mcts = MCTS()
     engine = MinMax()
-    #mcts.evaluate(mcts.root, 1000)
     loop = tqdm(range(episodes))
     count = [0, 0, 0]
     for t in loop:
-        #mcts = MCTS()
         node = mcts.root
         env.reset()
         done = False

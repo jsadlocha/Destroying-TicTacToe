@@ -26,38 +26,18 @@ class QtablePolicy:
             old_q = self.qtable[hash_value][1][actions[idx]]
             prob = self.get_probability(state)
 
-            #np.take(self.qtable[hash_value][1], self.qtable[hash_value][0])
-            #np.where(np.round(prob, 15)==1)[0][0]
-
             prob_idx = np.where(np.array(self.qtable[hash_value][0]) == actions[idx])[0][0]
             log_prob = np.log(prob[prob_idx]+1e-12)
             discounted_reward = np.sum(rewards[idx:] * discount_factor[:-(1+idx)])
-            #self.qtable[hash_value][1][actions[idx]] = old_q + self.alfa * (discounted_reward - old_q)
-            #print(self.qtable[hash_value][1][actions[idx]])
-            
-            
+                
             self.qtable[hash_value][1][actions[idx]] = old_q + self.alfa * -(log_prob * discounted_reward + old_q)#- self.alfa*old_q
 
-            # normalize
-            #prob = self.get_probability(state)/10.0
-            # mean = prob.mean()
-            # std = prob.std()#.clamp_min(1e-12)
-            # prob = (prob-mean)/std
-            #indices = self.qtable[hash_value][0]
-            #norm_q = np.array(self.qtable[hash_value][1])
-            #norm_q[indices] = prob.tolist()
-            # self.qtable[hash_value][1] = norm_q.tolist()
-            #import pdb; pdb.set_trace()       
-            #print(self.qtable[hash_value][1][actions[idx]])
-            #import pdb; pdb.set_trace()
             
 
     def get_probability(self, state):
         logits = self.get_logits(state)
-        #print(f'logits: {logits}')
         logits = logits.clip(-700,700)
         prob = np.exp(logits/self.temp)/np.sum(np.exp(logits/self.temp))
-        #prob = np.exp(logits)/np.sum(np.exp(logits))
         return prob
 
     def get_logits(self, state):
@@ -89,30 +69,17 @@ class QtablePolicy:
         for state, q in self.qtable.items():
             
             idx = q[0]
-            #logits = q[1]
-            #logit = np.take(logits, idx)
-            #import pdb; pdb.set_trace()
             prob = np.exp(np.take(q[1], q[0]))
-            #prob = np.round((prob/np.sum(prob))*10, 15)
             prob = prob/np.sum(prob)
             logit = np.log(prob+1e-12)
             old_q = np.array(self.qtable[state][1])
-            #import pdb; pdb.set_trace()
-            old_q[idx] = logit#logit-1.0
+            old_q[idx] = logit
             self.qtable[state][1] = old_q.tolist()
-
 
     def get_action(self, board):
         if np.random.rand() > self.epsilon:
             probs = self.get_probability(board)
             sample = np.random.multinomial(1, probs)
-            # legal = self.qtable[self.get_hash_value(board)][0]
-            # logits = np.take(self.qtable[self.get_hash_value(board)][1], legal)
-            # action = legal[np.argmax(logits)]
-            
-            
-            #probs = self.qtable[self.get_hash_value(board)][1]
-            #action_idx = np.where(sample > 0)[0][0]
             action_idx = np.argmax(probs)
             action = self.get_action_number_from_indices(board, action_idx)    
         else:
@@ -178,9 +145,6 @@ def gameloop():
 
         if t % 50 == 0:
             agent.decay_epsilon()
-
-        #if (t+1) % 1000 == 0:
-        #    agent.normalize_qtable()
 
         if (t+1) % 1000 == 0:
             print(f"\nDraw: {count[0]} O Win: {count[1]} X Win: {count[-1]}")

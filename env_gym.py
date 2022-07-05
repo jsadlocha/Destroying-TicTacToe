@@ -45,9 +45,4 @@ class TicTacToe:
         pass
 
 if __name__ == "__main__":
-    env = TicTacToe()
-    env.step(0)
-    env.step(1)
-    env.step(2)
-    print(env.sample_action())
-    env.render()
+    pass
