@@ -68,5 +68,7 @@ Usage: `python <filename>`
 
 
 # Images
-![game](https://github.com/jsadlocha/Destroying-TicTacToe/tree/main/img/tictactoe.png "game")</br>
-*I realized, this visualize style is not portable.
+
+![tictactoe](https://user-images.githubusercontent.com/108707659/184125688-d403308b-32b5-4eac-8083-9d6c88f10332.png)
+
+<sup>*I realized, this visualize style is not portable.</sup>
