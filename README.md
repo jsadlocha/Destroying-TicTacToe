@@ -7,7 +7,7 @@
 I try here different approaches, to beat opponent in tic-tac-toe.
 This game was chosen, because had very small amount combinations on the board.
 Every reinforcement learning algorithm runs as monte carlo, what mean learning is done after one whole game, because one step ahead learning is not enough for adversarial agent learning.
-Agents fight versus Random Moves or MinMax nondeterministic, which is just a random one the best moves.
+Agents fight versus Random Moves or MinMax nondeterministic, which is just a random one of the best moves.
 
 
 Algorithms with neural networks, they work on pytorch framework.</br>
